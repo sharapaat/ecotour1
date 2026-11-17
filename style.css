@@ -1,0 +1,761 @@
+:root {
+  --bg: #f7faf8;
+  --card: #ffffff;
+  --ink: #12323b;
+  --mut: #5d7780;
+  --pri: #2fa58a;
+  --pri2: #e6f7f1;
+  --coral: #ff7a59;
+  --line: #e3ebe8;
+  --shadow-sm: 0 4px 12px rgba(23, 50, 58, 0.05);
+  --shadow-md: 0 12px 28px rgba(23, 50, 58, 0.08);
+  --shadow-lg: 0 24px 48px rgba(23, 50, 58, 0.12);
+  --radius: 24px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 16px/1.6 "Noto Sans", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: Unbounded, "Noto Sans", sans-serif;
+  line-height: 1.25;
+  margin: 0 0 .5em;
+  font-weight: 700;
+}
+
+h2 { font-size: clamp(20px, 3vw, 28px); }
+
+/* --- НАВИГАЦИЯ (Glassmorphism) --- */
+nav {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 12px 20px;
+  overflow-x: auto;
+}
+
+.logo {
+  font: 700 18px Unbounded, sans-serif;
+  color: var(--pri);
+  margin-right: auto;
+  white-space: nowrap;
+  letter-spacing: -0.5px;
+}
+
+nav button {
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font: 500 15px inherit;
+  padding: 10px 16px;
+  border-radius: 99px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.25s ease;
+}
+
+nav button:hover {
+  background: var(--pri2);
+  color: var(--pri);
+  transform: translateY(-2px);
+}
+
+nav button[aria-current="true"] {
+  background: var(--pri);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(47, 165, 138, 0.35);
+}
+
+nav .req {
+  background: linear-gradient(135deg, var(--coral), #ff9a76);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(255, 122, 89, 0.35);
+}
+
+nav .req:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 24px rgba(255, 122, 89, 0.45);
+  background: linear-gradient(135deg, #ff6b4a, #ff9a76);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 3px solid var(--coral);
+  outline-offset: 3px;
+}
+
+/* --- ЖАЛПЫ ҚҰРЫЛЫМ --- */
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 20px 72px;
+}
+
+.view { display: none; animation: fadeUp 0.4s ease forwards; }
+.view.on { display: block; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- HERO (Басты бөлім) --- */
+.hero {
+  border-radius: var(--radius);
+  overflow: hidden;
+  position: relative;
+  background: linear-gradient(135deg, #f0faf6, #fff 60%);
+  border: 1px solid var(--line);
+  min-height: 480px;
+  box-shadow: var(--shadow-md);
+}
+
+.hero svg.bg {
+  position: absolute;
+  inset: auto 0 0 0;
+  width: 100%;
+  height: 58%;
+  z-index: 1;
+}
+
+.hero .t {
+  position: relative;
+  z-index: 2;
+  padding: 56px 48px;
+  max-width: 640px;
+}
+
+.hero h1 {
+  font-size: clamp(28px, 4.8vw, 48px);
+  color: #0f2d33;
+  letter-spacing: -1px;
+}
+
+.hero h3 {
+  color: #3d5962;
+  font: 500 17px "Noto Sans";
+  margin-bottom: 24px;
+}
+
+/* --- БАТЫРМАЛАР --- */
+.btn {
+  display: inline-block;
+  border: 0;
+  background: linear-gradient(135deg, var(--coral), #ff9a76);
+  color: #fff;
+  font: 600 15px inherit;
+  padding: 14px 28px;
+  border-radius: 99px;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(255, 122, 89, 0.35);
+  transition: all 0.25s ease;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 28px rgba(255, 122, 89, 0.45);
+}
+
+.btn:active { transform: translateY(-1px) scale(0.98); }
+
+.btn.alt {
+  background: #fff;
+  color: var(--ink);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--line);
+  margin-left: 8px;
+}
+
+.btn.alt:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--pri);
+  color: var(--pri);
+}
+
+/* --- АНИМАЦИЯЛАР --- */
+@keyframes fl { to { transform: translateX(30px); } }
+@keyframes bob { 50% { transform: translateY(-8px); } }
+.cloud { animation: fl 9s ease-in-out infinite alternate; }
+.sun { animation: bob 5s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+/* --- СЕКЦИЯЛАР МЕН КАРТОЧКАЛАР --- */
+section { margin-top: 64px; }
+
+.grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 12px 12px 8px;
+  text-align: left;
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+  border-color: transparent;
+}
+
+.im {
+  border-radius: 16px;
+  overflow: hidden;
+  aspect-ratio: 400/260;
+  position: relative;
+  background: #cfe;
+}
+
+.im svg, .im img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.card:hover .im img,
+.card:hover .im svg {
+  transform: scale(1.06);
+}
+
+.im i {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(4px);
+  color: #17323a;
+  font: 500 11px "Noto Sans";
+  font-style: normal;
+  padding: 4px 10px;
+  border-radius: 99px;
+  z-index: 2;
+}
+
+.card span {
+  display: block;
+  padding: 16px 12px 12px;
+}
+
+.card b {
+  font: 700 16px Unbounded, sans-serif;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.card small { color: var(--mut); font-size: 13px; }
+
+/* --- ЕКІ БӨЛІМДІ ҚҰРЫЛЫМ --- */
+.two {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 768px) {
+  .two { grid-template-columns: 1fr; }
+  .hero .t { padding: 32px 24px; }
+}
+
+/* --- ҚОРОБКАЛАР (Boxes) --- */
+.box {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 28px;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.3s ease;
+}
+
+.box:hover { box-shadow: var(--shadow-md); }
+
+.box.mint { background: #f3fcf8; border-color: #d8f0e8; }
+
+/* --- ТАҢДАМАЛЫ (Popular) --- */
+.pk {
+  padding: 0;
+  overflow: hidden;
+  cursor: pointer;
+  text-align: left;
+  color: inherit;
+  font: inherit;
+}
+
+.pk .im { border-radius: 0; aspect-ratio: 400/230; }
+
+.pk div.b { padding: 20px 24px 24px; }
+
+/* --- ТЕГТЕР --- */
+.tag {
+  display: inline-block;
+  background: var(--pri2);
+  color: var(--pri);
+  font-weight: 600;
+  font-size: 13px;
+  padding: 4px 14px;
+  border-radius: 99px;
+  margin-right: 8px;
+}
+
+/* --- ГРАФИК (Bars) --- */
+.bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 24px;
+  height: 220px;
+  border-bottom: 2px dashed var(--line);
+  padding: 0 12px;
+}
+
+.bars div {
+  flex: 1;
+  border-radius: 16px 16px 0 0;
+  position: relative;
+  height: 0;
+  transition: height 1.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  box-shadow: inset 0 -4px 10px rgba(0,0,0,0.05);
+}
+
+.bars div:nth-child(1) { background: #a6e3d4; }
+.bars div:nth-child(2) { background: #4fbfa3; }
+.bars div:nth-child(3) { background: linear-gradient(to top, var(--coral), #ff9a76); }
+
+.bars b {
+  position: absolute;
+  top: -32px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: Unbounded;
+  font-size: 18px;
+}
+
+.bars i {
+  position: absolute;
+  bottom: -32px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-style: normal;
+  color: var(--mut);
+  font-weight: 500;
+}
+
+/* --- КЕСТЕ --- */
+table { width: 100%; border-collapse: collapse; }
+
+th, td {
+  padding: 12px 8px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+}
+
+th { color: var(--mut); font-weight: 500; font-size: 14px; }
+td:nth-child(n+2) { font-weight: 600; color: var(--pri); }
+
+/* --- ЕРЕКШЕЛІКТЕР (Features) --- */
+.feat {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.feat .box {
+  text-align: center;
+  padding: 32px 24px;
+}
+
+.feat .box em {
+  font-size: 40px;
+  font-style: normal;
+  display: block;
+  margin-bottom: 16px;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+}
+
+/* --- ТІЗІМДЕР --- */
+ul.ok {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul.ok li {
+  padding-left: 36px;
+  position: relative;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+ul.ok li:before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 2px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--pri);
+  color: #fff;
+  font-size: 13px;
+  text-align: center;
+  line-height: 24px;
+  box-shadow: 0 4px 8px rgba(47, 165, 138, 0.3);
+}
+
+/* --- ТАҢДАУ БАТЫРМАЛАРЫ (Quiz) --- */
+.opt {
+  display: block;
+  width: 100%;
+  text-align: left;
+  margin: 10px 0;
+  padding: 14px 20px;
+  border-radius: 16px;
+  border: 2px solid var(--line);
+  background: var(--card);
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.opt:hover {
+  border-color: var(--pri);
+  background: var(--pri2);
+  transform: translateX(4px);
+}
+
+/* --- ИНПУТТАР --- */
+input.f {
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: 16px;
+  border: 2px solid var(--line);
+  background: var(--card);
+  color: inherit;
+  font: inherit;
+  margin-bottom: 12px;
+  transition: all 0.2s ease;
+}
+
+input.f:focus {
+  border-color: var(--pri);
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(47, 165, 138, 0.1);
+}
+
+/* --- ДИАЛОГ (Popup) --- */
+dialog {
+  border: 0;
+  border-radius: 28px;
+  padding: 0;
+  max-width: 640px;
+  width: calc(100% - 32px);
+  background: var(--card);
+  color: var(--ink);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+dialog[open] {
+  animation: popIn 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.95) translateY(10px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+dialog::backdrop {
+  background: rgba(18, 50, 59, 0.6);
+  backdrop-filter: blur(8px);
+}
+
+dialog .im { border-radius: 0; }
+dialog .in { padding: 24px 32px 32px; }
+
+dialog dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px 20px;
+  margin: 18px 0;
+}
+
+dt { color: var(--mut); font-weight: 500; }
+dd { margin: 0; font-weight: 600; }
+
+dialog { max-height: calc(100vh - 32px); overflow: auto; }
+dialog h3 { font-size: 16px; margin: 24px 0 12px; }
+
+/* --- КАРТА --- */
+.mapwrap {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 820px) {
+  .mapwrap { grid-template-columns: 1fr; }
+}
+
+#svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius);
+  background: #f3fafe;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+}
+
+.pin { cursor: pointer; }
+.pin circle { fill: var(--coral); stroke: #fff; stroke-width: 3; transition: all 0.2s; }
+.pin:hover circle { r: 14; fill: #ff5a36; }
+.pin text {
+  font: 600 13px "Noto Sans", sans-serif;
+  fill: #17323a;
+  paint-order: stroke;
+  stroke: #eaf7e2;
+  stroke-width: 4px;
+}
+
+#route {
+  fill: none;
+  stroke: var(--coral);
+  stroke-width: 4;
+  stroke-dasharray: 10 8;
+  stroke-linecap: round;
+  animation: dash 20s linear infinite;
+}
+
+@keyframes dash { to { stroke-dashoffset: -1000; } }
+
+label.stop {
+  display: flex;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+  cursor: pointer;
+  align-items: center;
+  transition: color 0.2s;
+}
+
+label.stop:hover { color: var(--pri); }
+
+.eco { font-size: 14px; color: var(--mut); line-height: 1.6; }
+
+/* --- FOOTER --- */
+footer {
+  background: #fff;
+  color: var(--mut);
+  border-top: 1px solid var(--line);
+  padding: 48px 20px;
+  margin-top: 64px;
+}
+
+footer .in {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  gap: 32px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+footer b { color: var(--ink); font-size: 17px; }
+
+/* --- ДЕСКТОП МӘЗІРІ (Бүйірлік) --- */
+@media (min-width: 821px) {
+  body { padding-left: 260px; }
+  nav {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 260px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    padding: 32px 20px;
+    border-bottom: 0;
+    border-right: 1px solid var(--line);
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.95);
+  }
+  .logo {
+    margin: 0 0 28px 12px;
+    font-size: 20px;
+  }
+  nav button {
+    text-align: left;
+    border-radius: 16px;
+    padding: 14px 18px;
+  }
+  nav .req { margin-top: auto; text-align: center; }
+}
+
+/* --- ТАҒЫ ДА СТИЛЬДЕР --- */
+.rule {
+  margin-top: 24px;
+  border: 1px solid var(--line);
+  border-left: 8px solid var(--pri);
+  border-radius: 20px;
+  padding: 28px 32px;
+  background: linear-gradient(135deg, #f7fcfa, #fff);
+  box-shadow: var(--shadow-sm);
+}
+
+.rule b {
+  font: 600 20px Unbounded, sans-serif;
+  display: block;
+  margin-bottom: 8px;
+  color: var(--pri);
+}
+
+.rule p { margin: 0; color: var(--mut); font-size: 16px; }
+
+/* --- СТИКЕРЛЕР (Эмодзи) --- */
+.stk {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  font-size: 20px;
+  margin-left: 12px;
+  box-shadow: var(--shadow-sm);
+  border: 2px solid #fff;
+  flex: none;
+  vertical-align: middle;
+  font-family: "Noto Sans", sans-serif;
+  -webkit-text-fill-color: initial;
+  background: #fff;
+  transition: transform 0.2s ease;
+}
+
+h1 .stk { width: 44px; height: 44px; font-size: 24px; }
+
+nav button { display: flex; align-items: center; }
+
+nav .stk {
+  width: 32px;
+  height: 32px;
+  font-size: 18px;
+  margin: 0 12px 0 0;
+  border-radius: 10px;
+  border-width: 2px;
+  box-shadow: none;
+}
+
+nav .req { justify-content: center; }
+
+/* --- СКРОЛЛБАР --- */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: #cbd8d4; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--pri); }
+
+/* --- ТАҚЫРЫПТАР (Eyebrow) --- */
+.eyebrow {
+  display: inline-block;
+  font: 600 11px "Noto Sans";
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--pri);
+  background: var(--pri2);
+  padding: 6px 14px;
+  border-radius: 99px;
+  margin-bottom: 14px;
+}
+
+/* --- H1 H2 H3 --- */
+main h1 {
+  font-size: clamp(22px, 2.8vw, 30px);
+  letter-spacing: -0.5px;
+  position: relative;
+  padding-bottom: 16px;
+  margin-bottom: 20px;
+}
+
+main h1:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 64px;
+  height: 5px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--pri), var(--coral));
+}
+
+h2 {
+  font-size: clamp(16px, 1.8vw, 20px);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+h2:before {
+  content: "";
+  width: 6px;
+  height: 20px;
+  border-radius: 3px;
+  background: linear-gradient(var(--pri), var(--coral));
+  flex: none;
+}
+
+#d-t { font-size: 22px; color: var(--ink); }
+
+.lead {
+  color: var(--mut);
+  max-width: 65ch;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+/* --- ITEM TIZIMI --- */
+ol.it { list-style: none; padding: 0; margin: 0; }
+
+ol.it li {
+  border-left: 3px solid var(--pri);
+  padding: 4px 0 14px 16px;
+  margin-left: 6px;
+  color: var(--mut);
+}
+
+ol.it li b { color: var(--ink); }
