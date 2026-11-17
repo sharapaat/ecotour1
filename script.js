@@ -1,33 +1,32 @@
 var IM = {
   // Алматы облысы
-  "kolsay": "kolsai.jpg",             
-  "sharyn": "sharyn.jpeg",             
-  "big": "Almaty kol.jpeg",            
-  "medeu": "shymbulak-medeo.png",     
+  "kolsay": "kolsai.jpg",             // Көлсай
+  "sharyn": "sharyn.jpeg",             // Шарын
+  "big": "Almaty kol.jpeg",            // Үлкен Алматы көлі (скринда Almaty kol.jpeg)
+  "medeu": "shymbulak-medeo.png",     // Мөдеу/Шымбұлақ
 
   // Қызылорда облысы
-  "syr": "syrdariya.jpg",             
-  "korkyt": "korkyt.jpeg",             
-  "baikonur": "baikonur.jpg",         
-  "kambash": "kambash.jpeg",           
-  "aral": "aral.jpeg",                 
-  "bars": "barsakelmes.jpg",          
+  "syr": "syrdariya.jpg",             // Сырдария
+  "korkyt": "korkyt.jpeg",             // Қорқыт Ата
+  "baikonur": "baikonur.jpg",         // Байқоңыр
+  "kambash": "kambash.jpeg",           // Қамбаш
+  "aral": "aral.jpeg",                 // Арал теңізі
+  "bars": "barsakelmes.jpg",          // Барсакелмес
 
-  // Басқа облыстар
+  // Басқа облыстар (скриндағы суреттер бойынша)
   "bayanaul": "bayan.jpg",
   "jasybay": "zhasybai.jpeg",
-  "thanos": "tan.jpeg",                
-  "bozzhyra": "boz.jpg",              
-  "astana": "astana.jpg",             
-  "burabay": "burabai.jpg",           
-  "okzhetpes": "okzhetpes.jpg",       
-  "tausamaly": "tausamaly.webp",      
-  "sairam": "sai.jpeg",              
-  "saryagash": "saryagash.jpeg",           
-  "altay": "altai.jpg",               
-  "rakhmanov": "rakhmanov.jpg",       
-  "katon": "katon.png"                
-};
+  "thanos": "tan.jpeg",                // Скринда бөлек thanos жоқ, бірақ boz бар, соған қостым (қаласаң өзгертесің)
+  "bozzhyra": "boz.jpg",              // Бозжыра
+  "astana": "astana.jpg",             // Астана
+  "burabay": "burabai.jpg",           // Бурабай
+  "okzhetpes": "okzhetpes.jpg",       // Оқжетпес
+  "tausamaly": "tausamaly.webp",      // Тау самалы
+  "sairam": "sai.jpeg",              // Сайрам (скринда нақтысы жоқ, Алтайдың суретін қостым, кейін өзгертесің)
+  "saryagash": "saryagash.jpeg",           // Сарыағаш (скринда жоқ, Алтай қостым)
+  "altay": "altai.jpg",               // Алтай
+  "rakhmanov": "rakhmanov.jpg",       // Рахманов
+  "katon": "katon.png"                // Қатонқарағай
 };function $(i){return document.getElementById(i)}
 function Pa(d,c,o){return'<path d="'+d+'" fill="'+c+'"'+(o?' opacity="'+o+'"':'')+'/>'}
 function sky(a,b,sun){var i='g'+a.slice(1)+b.slice(1);return'<defs><linearGradient id="'+i+'" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="'+a+'"/><stop offset="1" stop-color="'+b+'"/></linearGradient></defs><rect width="400" height="260" fill="url(#'+i+')"/>'+(sun?'<circle cx="'+sun+'" cy="52" r="20" fill="#fff3b8"/>':'')}
